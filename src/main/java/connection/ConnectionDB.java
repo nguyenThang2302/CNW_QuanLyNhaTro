@@ -8,7 +8,7 @@ public class ConnectionDB {
     public Connection connect() {
         Connection connection = null;
 
-        String url = "jdbc:mysql://localhost:3306/DB_NAME";
+        String url = "jdbc:mysql://localhost:3306/boardinghouse";
         String user = "root";
         String password = "admin";
 
