@@ -34,6 +34,18 @@ public class RoomController extends HttpServlet {
 			destination = "/room/roomList.jsp";
 			RequestDispatcher rd = getServletContext().getRequestDispatcher(destination);
 			rd.forward(request, response);
+		} else if (request.getParameter("deleteroom") != null) {
+			RoomBO roomBO = new RoomBO();
+			if (roomBO.deleteRoom(request.getParameter("deleteroom")) != -1) {
+				ArrayList<Room> listRoom = null;
+				try {
+					listRoom = roomBO.getAllRoomByBDH(request.getParameter("allroom"));
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				request.setAttribute("listRoom", listRoom);
+				response.sendRedirect("/QuanLyNhaTro/landlord/boarding-house?allroom=" + request.getParameter("idbdh"));
+			}
 		}
 	}
 

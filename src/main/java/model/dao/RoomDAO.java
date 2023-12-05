@@ -33,4 +33,23 @@ public class RoomDAO {
 	    }
 		return result;
 	}
+	
+	public int deleteRoom(String id) {
+		Connection con = connection.connect();
+	    String sql = "DELETE FROM rooms WHERE id = ?";
+	    try {
+	        PreparedStatement pstmt = con.prepareStatement(sql);
+	        pstmt.setString(1, id);
+	        int rowsAffected = pstmt.executeUpdate();
+	        
+	        pstmt.close();
+	        con.close();
+	        
+	        return rowsAffected;
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return -1;
+	}
 }

@@ -21,6 +21,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
 body {
 	color: #566787;
@@ -236,5 +237,15 @@ table.table td i {
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		var currentURL = window.location.href;
+		var url = new URL(currentURL);
+		var idbdhParam = url.searchParams.get("allroom");
+		var deleteRoomLink = $(".delete");
+        var currentHref = deleteRoomLink.attr("href");
+        deleteRoomLink.attr("href", currentHref + "&idbdh=" + idbdhParam);
+	});
+	</script>
 </body>
 </html>

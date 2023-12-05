@@ -11,4 +11,7 @@ public class RoomBO {
 	public ArrayList<Room> getAllRoomByBDH(String boarding_house_id) throws SQLException {
 		return roomDAO.getAllRoomByBDH(boarding_house_id);
 	}
+	public int deleteRoom(String id) {
+		return roomDAO.deleteRoom(id);
+	}
 }
