@@ -45,7 +45,7 @@
 				<div class="card-body">
 					<form action="RoomController" method="POST">
 						<input id="idbdh" class="input--style-5" type="text" style="display: none;"
-							name="id">
+							name="idbdh">
 						<div class="form-row">
 							<div class="name">Tên phòng</div>
 							<div class="value">
