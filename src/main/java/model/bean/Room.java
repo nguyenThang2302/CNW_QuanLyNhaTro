@@ -10,6 +10,10 @@ public class Room {
 	private int current_water_meter;
 	private double room_cost;
 	
+	public Room() {
+		
+	}
+	
 	public Room(String id, String name, String boarding_house_id, int number_of_people_in_room, String status,
 			int current_electric_meter, int current_water_meter, double room_cost) {
 		super();

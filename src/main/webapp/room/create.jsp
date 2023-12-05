@@ -43,7 +43,7 @@
 					<h2 class="title">Tạo phòng trọ</h2>
 				</div>
 				<div class="card-body">
-					<form action="RoomController" method="POST">
+					<form action="../landlord/boarding-house" method="POST">
 						<input id="idbdh" class="input--style-5" type="text" style="display: none;"
 							name="idbdh">
 						<div class="form-row">
