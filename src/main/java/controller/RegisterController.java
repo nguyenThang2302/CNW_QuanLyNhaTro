@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,7 +27,7 @@ public class RegisterController extends HttpServlet {
 			String destination = null;
 			AccountBO accountBO = new AccountBO();
 			UltilsService ultilsService = new UltilsService();
-			String userID = ultilsService.generateCustomerCode();
+			String userID = UUID.randomUUID().toString();
 			String fullname = request.getParameter("fullname");
 			String address = request.getParameter("address");
 			String email = request.getParameter("email");
