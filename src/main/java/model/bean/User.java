@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import model.bean.enums.Role;
 
-
 public class User {
     private UUID id;
     private String email ;
@@ -43,12 +42,11 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
 	public Role getRole() {
 		return role;
 	}
 	public void setRole(Role role) {
-		this.role = role;
+        this.role = role;
 	}
 	public boolean isEnabled() {
 		return enabled;

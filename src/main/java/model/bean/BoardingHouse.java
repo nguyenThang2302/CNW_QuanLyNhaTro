@@ -15,6 +15,11 @@ public class BoardingHouse {
     private Double waterUnitPrice;
     
     private User user;
+    
+
+	public BoardingHouse() {
+		super();
+	}
 
 	public UUID getId() {
 		return id;
