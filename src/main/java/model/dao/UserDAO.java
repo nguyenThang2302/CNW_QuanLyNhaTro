@@ -15,7 +15,56 @@ import model.bean.User;
 import model.bean.enums.Role;
 public class UserDAO {
 	private static ConnectionDB connection = new ConnectionDB();
-
+	
+	public int registerAccount(User user) {
+	    Connection con = connection.connect();
+	    String sql = "INSERT INTO users (id, full_name, password, email, address, is_enabled, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	    try {
+	        PreparedStatement pstmt = con.prepareStatement(sql);
+	        pstmt.setString(1, user.getId().toString());
+	        pstmt.setString(2, user.getFullName());
+	        pstmt.setString(3, user.getPassword());
+	        pstmt.setString(4, user.getEmail());
+	        pstmt.setString(5, user.getAddress());
+	        pstmt.setBoolean(6, false);
+	        pstmt.setString(7, String.valueOf(user.getRole()));
+	        int rowsAffected = pstmt.executeUpdate();
+	        pstmt.close();
+	        con.close();
+	        
+	        return rowsAffected;
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return -1;
+	}
+	
+	public User loginAccount(String email, String password) throws SQLException {
+		Connection con = connection.connect();
+		String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+		User user = new User();
+		try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, email);
+			pstmt.setString(2, password);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				user.setId(UUID.fromString(rs.getString("id")));
+				user.setFullName(rs.getString("full_name"));
+				user.setPassword(rs.getString("password"));
+				user.setEmail(rs.getString("email"));
+				user.setAddress(rs.getString("address"));
+				user.setEnabled(rs.getBoolean("is_enabled"));
+				user.setRole(Role.valueOf(rs.getString("role")));
+				
+			}
+		} catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		return user;
+	}
+	
 	public List<User> getListUserByRole(String role) throws SQLException {
 		Connection con = connection.connect();
 		User user = new User();
@@ -124,5 +173,6 @@ public class UserDAO {
 			con.close();
 		}
 	}
+	
 
 }

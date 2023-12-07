@@ -221,12 +221,12 @@ table.table td i {
 							<td><%=listRoom.get(i).getRoom_cost()%></td>
 							<td><%=listRoom.get(i).getStatus()%></td>
 							<td><a
-								href="../landlord/boarding-house?detailroom=<%=listRoom.get(i).getId()%>"
+								href="../landlord/room?detailroom=<%=listRoom.get(i).getId()%>"
 								class="view" title="View" data-toggle="tooltip"><i
 									class="material-icons">&#xE417;</i></a> <a
-								href="../landlord/boarding-house?updateroom=<%=listRoom.get(i).getId()%>"
+								href="../landlord/room?updateroom=<%=listRoom.get(i).getId()%>"
 								class="edit" title="Edit" data-toggle="tooltip"><i
-									class="material-icons">&#xE254;</i></a> <a href="../landlord/boarding-house?deleteroom=<%=listRoom.get(i).getId()%>" class="delete"
+									class="material-icons">&#xE254;</i></a> <a href="../landlord/room?deleteroom=<%=listRoom.get(i).getId()%>" class="delete"
 								title="Delete" data-toggle="tooltip"><i
 									class="material-icons">&#xE872;</i></a></td>
 						</tr>

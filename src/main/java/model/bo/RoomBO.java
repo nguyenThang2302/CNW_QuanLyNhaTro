@@ -17,5 +17,10 @@ public class RoomBO {
 	public int createRoom(Room newRoom) {
 		return roomDAO.createRoom(newRoom);
 	}
-
+	public Room getRoomByUUID(String uuid) throws SQLException {
+		return roomDAO.getRoomByUUID(uuid);
+	}
+	public int updateRoom(Room updateRoom) {
+		return roomDAO.updateRoom(updateRoom);
+	}
 }

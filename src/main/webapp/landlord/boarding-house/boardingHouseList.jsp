@@ -177,7 +177,7 @@ $(document).ready(function(){
                             <td> <%= boardingHouses.get(i).getElectricityUnitPrice() %></td>
                             <td> <%= boardingHouses.get(i).getWaterUnitPrice() %></td>
                             <td>
-                                <a href="../landlord/boarding-house?allroom=<%= boardingHouses.get(i).getId()%>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+                                <a href="../landlord/room?allroom=<%= boardingHouses.get(i).getId()%>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
                                 <a href="../landlord/boarding-house?id=<%= boardingHouses.get(i).getId()%>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                                 <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                             </td>

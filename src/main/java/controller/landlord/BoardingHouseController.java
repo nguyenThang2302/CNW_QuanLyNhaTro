@@ -1,4 +1,5 @@
 package controller.landlord;
+import model.bean.enums.Role;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.bean.BoardingHouse;
 import model.bean.Room;
@@ -25,40 +27,20 @@ public class BoardingHouseController extends HttpServlet{
 	RoomBO roomBO=new RoomBO();
 	
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		User user=(User)request.getSession().getAttribute("user");
+		if (user.getRole().equals(Role.LANDLORD)) {
 		if (request.getParameter("id")!=null) {
 			UUID boardingHouseId=UUID.fromString(request.getParameter("id"));
 			BoardingHouse boardingHouse=boardingHouseBO.getBoardingHouseById(null, boardingHouseId);
 			request.setAttribute("boardingHouse", boardingHouse);
 		    request.getRequestDispatcher("/landlord/boarding-house/update.jsp").forward(request, response);
-		}else if (request.getParameter("allroom") != null) {
-			String destination = null;
-			RoomBO roomBO = new RoomBO();
-			ArrayList<Room> listRoom = null;
-			try {
-				listRoom = roomBO.getAllRoomByBDH(request.getParameter("allroom"));
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			request.setAttribute("listRoom", listRoom);
-			destination = "/landlord/room/roomList.jsp";
-			RequestDispatcher rd = getServletContext().getRequestDispatcher(destination);
-			rd.forward(request, response);
-		}else if (request.getParameter("deleteroom") != null) {
-			RoomBO roomBO = new RoomBO();
-			if (roomBO.deleteRoom(request.getParameter("deleteroom")) != -1) {
-				ArrayList<Room> listRoom = null;
-				try {
-					listRoom = roomBO.getAllRoomByBDH(request.getParameter("allroom"));
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				request.setAttribute("listRoom", listRoom);
-				response.sendRedirect("/QuanLyNhaTro/landlord/boarding-house?allroom=" + request.getParameter("idbdh"));
-			}
 		}else {
 			List<BoardingHouse> boardingHouses=boardingHouseBO.getListBoardingHouse( UUID.fromString("34fbcd62-2a15-4e37-8dbf-cbb19e57b8e2"));
 			request.setAttribute("boardingHouses", boardingHouses);
 		    request.getRequestDispatcher("/landlord/boarding-house/boardingHouseList.jsp").forward(request, response);
+		}
+		}else {
+			response.sendRedirect("./404.jsp");
 		}
 		
 	}
@@ -98,31 +80,6 @@ public class BoardingHouseController extends HttpServlet{
 				List<BoardingHouse> boardingHouses=boardingHouseBO.getListBoardingHouse( UUID.fromString("34fbcd62-2a15-4e37-8dbf-cbb19e57b8e2"));
 				request.setAttribute("boardingHouses", boardingHouses);
 				 request.getRequestDispatcher("/landlord/boarding-house/boardingHouseList.jsp").forward(request, response);
-			}
-		}else if (request.getParameter("create_room") != null) {
-			String destination = null;
-			String roomID = UUID.randomUUID().toString();
-			User user = (User) request.getSession().getAttribute("user");
-			String idbdh = request.getParameter("idbdh");
-			String name = request.getParameter("name");
-			String numberProple = request.getParameter("number_people");
-			String currentElectricty = request.getParameter("electricty");
-			String currentWater = request.getParameter("water");
-			String price = request.getParameter("price");
-			String status = "empty";
-			Room newRoom = new Room(roomID, name, idbdh, Integer.parseInt(numberProple), status,
-					Integer.parseInt(currentElectricty), Integer.parseInt(currentWater), Double.parseDouble(price));
-			BoardingHouseBO boardingHouseBO = new BoardingHouseBO();
-			if (roomBO.createRoom(newRoom) != -1) {
-				RoomBO roomBO = new RoomBO();
-				ArrayList<Room> listRoom = null;
-				try {
-					listRoom = roomBO.getAllRoomByBDH(request.getParameter("allroom"));
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				request.setAttribute("listRoom", listRoom);
-				response.sendRedirect("/QuanLyNhaTro/landlord/boarding-house?allroom=" + idbdh);
 			}
 		}
 	}
