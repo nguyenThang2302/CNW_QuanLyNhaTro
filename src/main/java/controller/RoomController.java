@@ -46,6 +46,19 @@ public class RoomController extends HttpServlet {
 				request.setAttribute("listRoom", listRoom);
 				response.sendRedirect("/QuanLyNhaTro/landlord/boarding-house?allroom=" + request.getParameter("idbdh"));
 			}
+		} else if (request.getParameter("updateroom") != null && request.getParameter("idbdh") != null) {
+			String destination = null;
+			RoomBO roomBO = new RoomBO();
+			Room detailRoom = null;
+			try {
+				detailRoom = roomBO.getRoomByUUID(request.getParameter("updateroom"));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("detailRoom", detailRoom);
+			destination = "/room/update.jsp";
+			RequestDispatcher rd = getServletContext().getRequestDispatcher(destination);
+			rd.forward(request, response);
 		}
 	}
 
@@ -67,6 +80,27 @@ public class RoomController extends HttpServlet {
 			BoardingHouseBO boardingHouseBO = new BoardingHouseBO();
 			if (boardingHouseBO.createRoom(newRoom) != -1) {
 				RoomBO roomBO = new RoomBO();
+				ArrayList<Room> listRoom = null;
+				try {
+					listRoom = roomBO.getAllRoomByBDH(request.getParameter("allroom"));
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				request.setAttribute("listRoom", listRoom);
+				response.sendRedirect("/QuanLyNhaTro/landlord/boarding-house?allroom=" + idbdh);
+			}
+		} else if (request.getParameter("update_room") != null) {
+			String idbdh = request.getParameter("idbdh");
+			String idroom = request.getParameter("idroom");
+			String name = request.getParameter("name");
+			String number_people = request.getParameter("number_people");
+			String electricty = request.getParameter("electricty");
+			String water = request.getParameter("water");
+			String price = request.getParameter("price");
+			String status = request.getParameter("status");
+			Room updateRoom = new Room(idroom, name, idbdh, Integer.parseInt(number_people), status, Integer.parseInt(electricty), Integer.parseInt(water), Double.parseDouble(price));
+			RoomBO roomBO = new RoomBO();
+			if (roomBO.updateRoom(updateRoom) != - 1) {
 				ArrayList<Room> listRoom = null;
 				try {
 					listRoom = roomBO.getAllRoomByBDH(request.getParameter("allroom"));

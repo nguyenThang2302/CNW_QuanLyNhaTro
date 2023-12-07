@@ -218,7 +218,11 @@ table.table td i {
 							<td><%=listRoom.get(i).getCurrent_electric_meter()%></td>
 							<td><%=listRoom.get(i).getCurrent_water_meter()%></td>
 							<td><%=listRoom.get(i).getRoom_cost()%></td>
-							<td><%=listRoom.get(i).getStatus()%></td>
+							<% if(listRoom.get(i).getStatus().equals("empty")){ %>
+							<td>Còn trống</td>
+							<%} else { %>
+							<td>Đã cho thuê</td>
+							<%} %>
 							<td><a
 								href="../landlord/boarding-house?detailroom=<%=listRoom.get(i).getId()%>"
 								class="view" title="View" data-toggle="tooltip"><i
@@ -245,6 +249,9 @@ table.table td i {
 		var deleteRoomLink = $(".delete");
         var currentHref = deleteRoomLink.attr("href");
         deleteRoomLink.attr("href", currentHref + "&idbdh=" + idbdhParam);
+        var updateRoomLink = $(".edit");
+        var currentHrefUpdate = updateRoomLink.attr("href");
+        updateRoomLink.attr("href", currentHrefUpdate + "&idbdh=" + idbdhParam);
 	});
 	</script>
 </body>

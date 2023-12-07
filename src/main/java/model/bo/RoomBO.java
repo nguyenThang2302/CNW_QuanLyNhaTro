@@ -14,4 +14,10 @@ public class RoomBO {
 	public int deleteRoom(String id) {
 		return roomDAO.deleteRoom(id);
 	}
+	public Room getRoomByUUID(String uuid) throws SQLException {
+		return roomDAO.getRoomByUUID(uuid);
+	}
+	public int updateRoom(Room updateRoom) {
+		return roomDAO.updateRoom(updateRoom);
+	}
 }
