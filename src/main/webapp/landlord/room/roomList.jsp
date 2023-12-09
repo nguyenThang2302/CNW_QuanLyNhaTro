@@ -21,7 +21,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
 body {
 	color: #566787;
@@ -172,14 +172,16 @@ table.table td i {
 </head>
 <body>
 	<%
-		ArrayList<Room> listRoom = (ArrayList<Room>) request.getAttribute("listRoom");
+	ArrayList<Room> listRoom = (ArrayList<Room>) request.getAttribute("listRoom");
 	%>
 	<div class="container">
 		<div class="table-responsive">
 			<div class="table-wrapper">
 				<div class="table-title">
 					<div class="row">
-					 <a href="../landlord/room/create.jsp" class="btn btn--radius-2 btn--red" id="btn_add_room">Create new</a>
+						<a href="../landlord/room/create.jsp"
+							class="btn btn--radius-2 btn--red" id="btn_add_room">Create
+							new</a>
 						<div class="col-sm-8">
 							<h2>
 								Danh sách <b>phòng của nhà trọ</b>
@@ -226,30 +228,51 @@ table.table td i {
 									class="material-icons">&#xE417;</i></a> <a
 								href="../landlord/boarding-house?updateroom=<%=listRoom.get(i).getId()%>"
 								class="edit" title="Edit" data-toggle="tooltip"><i
-									class="material-icons">&#xE254;</i></a> <a href="../landlord/boarding-house?deleteroom=<%=listRoom.get(i).getId()%>" class="delete"
-								title="Delete" data-toggle="tooltip"><i
-									class="material-icons">&#xE872;</i></a></td>
+									class="material-icons">&#xE254;</i></a> <a
+								href="../landlord/boarding-house?deleteroom=<%=listRoom.get(i).getId()%>"
+								class="delete" title="Delete" data-toggle="tooltip"><i
+									class="material-icons">&#xE872;</i></a> <a
+								href="../landlord/boarding-house?view_invoice=<%=listRoom.get(i).getId()%>"
+								class="view" title="Create" data-toggle="tooltip">View
+									Invoice</a><a
+								href="../landlord/boarding-house?add_new_invoice=<%=listRoom.get(i).getId()%>"
+								class="view" title="Create" data-toggle="tooltip">Create
+									Invoice</a></td>
+
+
 						</tr>
 						<%
 						}
 						%>
 					</tbody>
+
 				</table>
+				<%
+				if (request.getSession().getAttribute("status") != null) {
+				%>
+				<span class="alert alert-danger"><%=request.getSession().getAttribute("status")%></span>
+				<%
+				}
+				request.getSession().removeAttribute("status");
+				%>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
-	$(document).ready(function() {
-		var currentURL = window.location.href;
-		var url = new URL(currentURL);
-		var idbdhParam = url.searchParams.get("allroom");
-		var deleteRoomLink = $(".delete");
-		var btnAddRoom = $("#btn_add_room");
-		var currentHrefAddRoom = btnAddRoom.attr("href");
-        var currentHref = deleteRoomLink.attr("href");
-        deleteRoomLink.attr("href", currentHref + "&idbdh=" + idbdhParam);
-        btnAddRoom.attr("href", currentHrefAddRoom + "?idbdh=" + idbdhParam);
-	});
+		$(document).ready(
+				function() {
+					var currentURL = window.location.href;
+					var url = new URL(currentURL);
+					var idbdhParam = url.searchParams.get("allroom");
+					var deleteRoomLink = $(".delete");
+					var btnAddRoom = $("#btn_add_room");
+					var currentHrefAddRoom = btnAddRoom.attr("href");
+					var currentHref = deleteRoomLink.attr("href");
+					deleteRoomLink.attr("href", currentHref + "&idbdh="
+							+ idbdhParam);
+					btnAddRoom.attr("href", currentHrefAddRoom + "?idbdh="
+							+ idbdhParam);
+				});
 	</script>
 </body>
 </html>

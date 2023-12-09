@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-        
+            
+    
     <wb-module deploy-name="QuanLyNhaTro">
-                
+                        
+        
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-                
+                        
+        
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <dependent-module archiveName="mysql-connector-java-8.0.30.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/D:/Programing Language/Java/conn/mysql-connector-java-8.0.30.jar">
+        <dependent-module archiveName="mysql-connector-java-8.0.30.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/ADMIN/Downloads/Dowloaded Library/mysql-connector-java-8.0.30.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-                
+                        
+        
         <property name="context-root" value="QuanLyNhaTro"/>
-                
+                        
+        
         <property name="java-output-path" value="/QuanLyNhaTro/build/classes"/>
-            
-    </wb-module>
+                    
     
+    </wb-module>
+        
+
 </project-modules>

@@ -25,7 +25,7 @@ public class UserDAO {
 		pstmt.setString(1, role);
 		ResultSet rs = pstmt.executeQuery();
 		while (rs.next()) {
-			user.setId(UUID.randomUUID());
+			user.setId(UUID.fromString(rs.getString("id")));
 			user.setAddress(rs.getString("address"));
 			user.setFullName(rs.getString("full_name"));
 			user.setEmail(rs.getString("email"));
@@ -44,7 +44,7 @@ public class UserDAO {
 		ResultSet rs = pstmt.executeQuery();
 		while (rs.next()) {
 			User user = new User();
-			user.setId(UUID.randomUUID());
+			user.setId(UUID.fromString(rs.getString("id")));
 			user.setAddress(rs.getString("address"));
 			user.setFullName(rs.getString("full_name"));
 			user.setEmail(rs.getString("email"));
