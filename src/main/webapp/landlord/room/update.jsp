@@ -1,3 +1,4 @@
+<%@page import="model.bean.enums.RoomStatus"%>
 <%@page import="model.bean.Room"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -106,7 +107,7 @@
 									<%-- <input class="input--style-5" type="text" name="status"
 										value="<%=detailRoom.getStatus()%>"> --%>
 									<%
-									if (detailRoom.getStatus().equals("empty")) {
+									if (detailRoom.getStatus().equals(RoomStatus.EMPTY)) {
 									%>
 									<select id="status" name="status">
 										<option value="empty">Còn trống</option>

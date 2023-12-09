@@ -1,11 +1,13 @@
 package model.bean;
 
+import model.bean.enums.RoomStatus;
+
 public class Room {
 	private String id;
 	private String name;
 	private String boarding_house_id;
 	private int number_of_people_in_room;
-	private String status;
+	private RoomStatus status;
 	private int current_electric_meter;
 	private int current_water_meter;
 	private double room_cost;
@@ -14,7 +16,7 @@ public class Room {
 		
 	}
 	
-	public Room(String id, String name, String boarding_house_id, int number_of_people_in_room, String status,
+	public Room(String id, String name, String boarding_house_id, int number_of_people_in_room, RoomStatus status,
 			int current_electric_meter, int current_water_meter, double room_cost) {
 		super();
 		this.id = id;
@@ -59,11 +61,13 @@ public class Room {
 		this.number_of_people_in_room = number_of_people_in_room;
 	}
 
-	public String getStatus() {
+	
+
+	public RoomStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(RoomStatus status) {
 		this.status = status;
 	}
 

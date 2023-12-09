@@ -12,7 +12,6 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Au Register Forms by Colorlib</title>
 
     <!-- Icons font CSS-->
     <link href="../template/createHouse/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -36,7 +35,7 @@
                     <h2 class="title">Update Boarding House</h2>
                 </div>
                 <div class="card-body">
-                    <form action="../landlord/boarding-house" method="POST">
+                    <form action="../boarding-house" method="POST">
                     <div class="form-row">
                             <div class="name">ID</div>
                             <div class="value">

@@ -86,6 +86,35 @@ public class BoardingHouseDAO {
 		}
 		return boardingHouses;
 	}
+
+	public List<BoardingHouse> getListBoardingHoseOfTenant(UUID userId) {
+		List<BoardingHouse> boardingHouses=new ArrayList<>();
+		try {
+			ConnectionDB connectionDB=new ConnectionDB();
+			Connection connection=connectionDB.connect();
+			String sql="SELECT DISTINCT b.* FROM boarding_house b\r\n"
+					+ "JOIN rooms r ON r.boarding_house_id = b.id\r\n"
+					+ "JOIN users_in_room u ON u.room_id = r.id\r\n"
+					+ "WHERE u.user_id =?";
+			int count=1;
+			PreparedStatement pstm = connection.prepareStatement(sql);
+			pstm.setString(count++, userId.toString());
+			ResultSet rs = pstm.executeQuery();
+
+	        while (rs.next()) {
+	        	BoardingHouse boardingHouse = new BoardingHouse();
+	            boardingHouse.setId(UUID.fromString(rs.getString("id")));
+	            boardingHouse.setName(rs.getString("name"));
+	            boardingHouse.setAddress(rs.getString("address"));
+	            boardingHouse.setElectricityUnitPrice(rs.getDouble("electricity_unit_price"));
+	            boardingHouse.setWaterUnitPrice(rs.getDouble("water_unit_price"));
+	            boardingHouses.add(boardingHouse);
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boardingHouses;
+	}
 	
 
 }

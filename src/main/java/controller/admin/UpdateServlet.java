@@ -15,47 +15,36 @@ import model.dao.UserDAO;
 import model.bean.User;
 import model.bean.enums.Role;
 
-/**
- * Servlet implementation class RegisterServlet
- */
 @WebServlet("/admin/update")
 public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserBO userBO = new UserBO();
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public UpdateServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		User user = (User) request.getSession().getAttribute("user");
+		if (user.getRole().equals(Role.LANDLORD)) {
 		String email = request.getParameter("email");
-		User user = null;
+		User userInfo = null;
 		try {
-			user = userBO.getUserByEmail(email);
+			userInfo = userBO.getUserByEmail(email);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("user", user);
+		request.setAttribute("userInfo", userInfo);
 		request.getRequestDispatcher("/admin/form_update.jsp").forward(request, response);
+		}else {
+			response.sendRedirect("../404.jsp");
+		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		User user = (User) request.getSession().getAttribute("user");
+		if (user.getRole().equals(Role.ADMIN)) {
 		String address = request.getParameter("address");
 		String email = request.getParameter("email");
 		String fullName = request.getParameter("fullName");
@@ -63,8 +52,6 @@ public class UpdateServlet extends HttpServlet {
 
 		String role = request.getParameter("role");
 		boolean enabled = Boolean.parseBoolean(request.getParameter("isEnabled"));
-
-		// Tạo đối tượng User với thông tin mới
 		User updatedUser = new User();
 		updatedUser.setEmail(email);
 		updatedUser.setAddress(address);
@@ -74,17 +61,14 @@ public class UpdateServlet extends HttpServlet {
 		updatedUser.setEnabled(enabled);
 
 		try {
-			// Gọi phương thức updateUser để cập nhật thông tin người dùng
-			userBO.updateUser(updatedUser);
-
-			// Chuyển hướng đến trang hiển thị thông báo cập nhật thành công hoặc trang
-			// chính
+			userBO.updateUser(updatedUser);		
 			response.sendRedirect("index");
 		} catch (SQLException e) {
-			// Xử lý lỗi nếu cần thiết
 			e.printStackTrace();
-			// Chuyển hướng đến trang hiển thị thông báo lỗi
 			response.sendRedirect("/error.jsp");
+		}
+		}else {
+			response.sendRedirect("../404.jsp");
 		}
 	}
 

@@ -40,14 +40,14 @@
 		<div class="wrapper wrapper--w790">
 			<div class="card card-5">
 				<div class="card-heading">
-					<h2 class="title">Tạo phòng trọ</h2>
+					<h2 class="title">Create room</h2>
 				</div>
 				<div class="card-body">
 					<form action="../room" method="POST">
 						<input id="idbdh" class="input--style-5" type="text" style="display: none;"
 							name="idbdh">
 						<div class="form-row">
-							<div class="name">Tên phòng</div>
+							<div class="name">Room Name</div>
 							<div class="value">
 								<div class="input-group">
 									<input class="input--style-5" type="text" name="name">
@@ -55,7 +55,7 @@
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="name">Số lượng người ở</div>
+							<div class="name">Number of people in room</div>
 							<div class="value">
 								<div class="input-group">
 									<input class="input--style-5" type="text" name="number_people">
@@ -63,7 +63,7 @@
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="name">Số chữ điện hiện tại:</div>
+							<div class="name">Current electric meter</div>
 							<div class="value">
 								<div class="input-group">
 									<input class="input--style-5" type="text" name="electricty">
@@ -71,7 +71,7 @@
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="name">Số chữ nước hiện tại:</div>
+							<div class="name">Current water meter</div>
 							<div class="value">
 								<div class="input-group">
 									<input class="input--style-5" type="text" name="water">
@@ -79,7 +79,7 @@
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="name">Giá phòng:</div>
+							<div class="name">Room cost</div>
 							<div class="value">
 								<div class="input-group">
 									<input class="input--style-5" type="text" name="price">
@@ -88,7 +88,7 @@
 						</div>
 						<div>
 							<button class="btn btn--radius-2 btn--red" type="submit"
-								name="create_room">Tạo phòng</button>
+								name="create_room">Create</button>
 						</div>
 					</form>
 				</div>

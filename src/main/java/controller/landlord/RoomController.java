@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.bean.Room;
 import model.bean.User;
+import model.bean.enums.Role;
+import model.bean.enums.RoomStatus;
 import model.bo.BoardingHouseBO;
 import model.bo.RoomBO;
 
@@ -22,6 +24,8 @@ public class RoomController extends HttpServlet{
 	private RoomBO roomBO=new RoomBO();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		User user = (User) request.getSession().getAttribute("user");
+		if (user.getRole().equals(Role.LANDLORD)) {
 		if (request.getParameter("allroom") != null) {
 			String destination = null;
 			RoomBO roomBO = new RoomBO();
@@ -60,15 +64,32 @@ public class RoomController extends HttpServlet{
 			destination = "/landlord/room/update.jsp";
 			RequestDispatcher rd = getServletContext().getRequestDispatcher(destination);
 			rd.forward(request, response);
+		}else if (request.getParameter("detailroom") != null) {
+			String destination = null;
+			RoomBO roomBO = new RoomBO();
+			ArrayList<User> listUserInRoom = null;
+			try {
+				listUserInRoom = roomBO.getAllMemberInRoom(request.getParameter("detailroom"));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("listUserInRoom", listUserInRoom);
+			destination = "/landlord/room/detail.jsp";
+			RequestDispatcher rd = getServletContext().getRequestDispatcher(destination);
+			rd.forward(request, response);
+		}
+		}else {
+			response.sendRedirect("../404.jsp");
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		User user = (User) request.getSession().getAttribute("user");
+		if (user.getRole().equals(Role.LANDLORD)) {
 		if (request.getParameter("create_room") != null) {
 			String destination = null;
 			String roomID = UUID.randomUUID().toString();
-			User user = (User) request.getSession().getAttribute("user");
 			String idbdh = request.getParameter("idbdh");
 			String name = request.getParameter("name");
 			String numberProple = request.getParameter("number_people");
@@ -76,7 +97,7 @@ public class RoomController extends HttpServlet{
 			String currentWater = request.getParameter("water");
 			String price = request.getParameter("price");
 			String status = "empty";
-			Room newRoom = new Room(roomID, name, idbdh, Integer.parseInt(numberProple), status,
+			Room newRoom = new Room(roomID, name, idbdh, Integer.parseInt(numberProple),RoomStatus.valueOf(status),
 					Integer.parseInt(currentElectricty), Integer.parseInt(currentWater), Double.parseDouble(price));
 			BoardingHouseBO boardingHouseBO = new BoardingHouseBO();
 			if (roomBO.createRoom(newRoom) != -1) {
@@ -99,7 +120,7 @@ public class RoomController extends HttpServlet{
 			String water = request.getParameter("water");
 			String price = request.getParameter("price");
 			String status = request.getParameter("status");
-			Room updateRoom = new Room(idroom, name, idbdh, Integer.parseInt(number_people), status, Integer.parseInt(electricty), Integer.parseInt(water), Double.parseDouble(price));
+			Room updateRoom = new Room(idroom, name, idbdh, Integer.parseInt(number_people), RoomStatus.valueOf(status), Integer.parseInt(electricty), Integer.parseInt(water), Double.parseDouble(price));
 			RoomBO roomBO = new RoomBO();
 			if (roomBO.updateRoom(updateRoom) != - 1) {
 				ArrayList<Room> listRoom = null;
@@ -111,6 +132,9 @@ public class RoomController extends HttpServlet{
 				request.setAttribute("listRoom", listRoom);
 				response.sendRedirect("/QuanLyNhaTro/landlord/room?allroom=" + idbdh);
 			}
+		}}else {
+			response.sendRedirect("../404.jsp");
 		}
+
 	}
 }

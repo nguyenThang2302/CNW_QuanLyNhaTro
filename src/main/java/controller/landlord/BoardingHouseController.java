@@ -1,4 +1,5 @@
 package controller.landlord;
+
 import model.bean.enums.Role;
 
 import java.io.IOException;
@@ -22,64 +23,71 @@ import model.bo.BoardingHouseBO;
 import model.bo.RoomBO;
 
 @WebServlet("/landlord/boarding-house")
-public class BoardingHouseController extends HttpServlet{
-	BoardingHouseBO boardingHouseBO=new BoardingHouseBO();
-	RoomBO roomBO=new RoomBO();
-	
-	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		User user=(User)request.getSession().getAttribute("user");
+public class BoardingHouseController extends HttpServlet {
+	BoardingHouseBO boardingHouseBO = new BoardingHouseBO();
+	RoomBO roomBO = new RoomBO();
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User user = (User) request.getSession().getAttribute("user");
 		if (user.getRole().equals(Role.LANDLORD)) {
-		if (request.getParameter("id")!=null) {
-			UUID boardingHouseId=UUID.fromString(request.getParameter("id"));
-			BoardingHouse boardingHouse=boardingHouseBO.getBoardingHouseById(null, boardingHouseId);
-			request.setAttribute("boardingHouse", boardingHouse);
-		    request.getRequestDispatcher("/landlord/boarding-house/update.jsp").forward(request, response);
+			if (request.getParameter("id") != null) {
+				UUID boardingHouseId = UUID.fromString(request.getParameter("id"));
+				BoardingHouse boardingHouse = boardingHouseBO.getBoardingHouseById(null, boardingHouseId);
+				request.setAttribute("boardingHouse", boardingHouse);
+				request.getRequestDispatcher("/landlord/boarding-house/update.jsp").forward(request, response);
+			} else {
+				List<BoardingHouse> boardingHouses = boardingHouseBO
+						.getListBoardingHouse(user.getId());
+				request.setAttribute("boardingHouses", boardingHouses);
+				request.getRequestDispatcher("/landlord/index.jsp").forward(request,
+						response);
+			}
 		}else {
-			List<BoardingHouse> boardingHouses=boardingHouseBO.getListBoardingHouse( UUID.fromString("34fbcd62-2a15-4e37-8dbf-cbb19e57b8e2"));
-			request.setAttribute("boardingHouses", boardingHouses);
-		    request.getRequestDispatcher("/landlord/boarding-house/boardingHouseList.jsp").forward(request, response);
+			response.sendRedirect("../404.jsp");
 		}
-		}else {
-			response.sendRedirect("./404.jsp");
-		}
-		
+
 	}
-	public void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("create")!=null) {
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (request.getParameter("create") != null) {
 			String name = request.getParameter("name");
 			String address = request.getParameter("address");
 			String electricity = request.getParameter("electricity");
 			String water = request.getParameter("water");
-			
-			BoardingHouse boardingHouse=new BoardingHouse();
+
+			BoardingHouse boardingHouse = new BoardingHouse();
 			boardingHouse.setAddress(address);
 			boardingHouse.setName(name);
 			boardingHouse.setElectricityUnitPrice(Double.parseDouble(electricity));
 			boardingHouse.setWaterUnitPrice(Double.parseDouble(water));
-			
-			if ( boardingHouseBO.create(boardingHouse, UUID.fromString("34fbcd62-2a15-4e37-8dbf-cbb19e57b8e2"))) {
-				List<BoardingHouse> boardingHouses=boardingHouseBO.getListBoardingHouse( UUID.fromString("34fbcd62-2a15-4e37-8dbf-cbb19e57b8e2"));
+
+			if (boardingHouseBO.create(boardingHouse, UUID.fromString("34fbcd62-2a15-4e37-8dbf-cbb19e57b8e2"))) {
+				List<BoardingHouse> boardingHouses = boardingHouseBO
+						.getListBoardingHouse(UUID.fromString("34fbcd62-2a15-4e37-8dbf-cbb19e57b8e2"));
 				request.setAttribute("boardingHouses", boardingHouses);
-				 request.getRequestDispatcher("/landlord/boarding-house/boardingHouseList.jsp").forward(request, response);
+				request.getRequestDispatcher("/landlord/boarding-house/boardingHouseList.jsp").forward(request,
+						response);
 			}
 		}
-		if (request.getParameter("update")!=null) {
+		if (request.getParameter("update") != null) {
 			String id = request.getParameter("id");
 			String name = request.getParameter("name");
 			String address = request.getParameter("address");
 			String electricity = request.getParameter("electricity");
 			String water = request.getParameter("water");
-			BoardingHouse boardingHouse=new BoardingHouse();
+			BoardingHouse boardingHouse = new BoardingHouse();
 			boardingHouse.setId(UUID.fromString(id));
 			boardingHouse.setAddress(address);
 			boardingHouse.setName(name);
 			boardingHouse.setElectricityUnitPrice(Double.parseDouble(electricity));
 			boardingHouse.setWaterUnitPrice(Double.parseDouble(water));
-			
-			if ( boardingHouseBO.create(boardingHouse, UUID.fromString("34fbcd62-2a15-4e37-8dbf-cbb19e57b8e2"))) {
-				List<BoardingHouse> boardingHouses=boardingHouseBO.getListBoardingHouse( UUID.fromString("34fbcd62-2a15-4e37-8dbf-cbb19e57b8e2"));
+
+			if (boardingHouseBO.create(boardingHouse, UUID.fromString("34fbcd62-2a15-4e37-8dbf-cbb19e57b8e2"))) {
+				List<BoardingHouse> boardingHouses = boardingHouseBO
+						.getListBoardingHouse(UUID.fromString("34fbcd62-2a15-4e37-8dbf-cbb19e57b8e2"));
 				request.setAttribute("boardingHouses", boardingHouses);
-				 request.getRequestDispatcher("/landlord/boarding-house/boardingHouseList.jsp").forward(request, response);
+				request.getRequestDispatcher("/landlord/boarding-house/boardingHouseList.jsp").forward(request,
+						response);
 			}
 		}
 	}

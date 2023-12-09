@@ -24,4 +24,7 @@ public class BoardingHouseBO {
 		return boardingHouseDAO.create(boardingHouse,userId);
 		
 	}
+	public List<BoardingHouse> getListBoardingHouseOfTenant(UUID userId){
+		return boardingHouseDAO.getListBoardingHoseOfTenant(userId);
+	}
 }

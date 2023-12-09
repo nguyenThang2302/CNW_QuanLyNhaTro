@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>Boarding house list</title>
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -142,7 +142,8 @@ $(document).ready(function(){
 	<div class="container">
         <div class="table-responsive">
             <div class="table-wrapper">
-             <a href="../landlord/boarding-house/create.jsp" class="btn btn--radius-2 btn--red" >Create new</a>
+             <button style="background-color: #75be78;color: black;" class="btn btn--radius-2 btn--red" id="btn_add_room" 
+							onclick="window.location.href='../landlord/boarding-house/create.jsp'">Create new</button>
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8"><h2>Boarding House <b>List</b></h2></div>
