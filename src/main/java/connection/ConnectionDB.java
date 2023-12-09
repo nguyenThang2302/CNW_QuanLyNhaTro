@@ -8,18 +8,14 @@ public class ConnectionDB {
     public Connection connect() {
         Connection connection = null;
 
-        String url = "jdbc:mysql://localhost:3306/db_name";
+        String url = "jdbc:mysql://localhost:3306/boardinghouse";
         String user = "root";
-        String password = "admin";
+        String password = "";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             connection =  DriverManager.getConnection(url, user, password);
-
-            if (connection != null) {
-                System.out.println("Connected to the database");
-            }
         } catch (ClassNotFoundException e) {
             System.err.println("Could not load database driver: " + e.getMessage());
         } catch (SQLException e) {
