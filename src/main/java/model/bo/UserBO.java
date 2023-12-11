@@ -9,6 +9,14 @@ import model.bean.User;
 public class UserBO {
 	UserDAO userDAO = new UserDAO();
 
+	
+	public int registerAccount(User user)  {
+		return userDAO.registerAccount(user);
+	}
+	public User loginAccount(String email, String password) throws SQLException {
+		return userDAO.loginAccount(email, password);
+	}
+	
 	public List<User> getListUserByRole(String role) throws SQLException {
 		return userDAO.getListUserByRole(role);
 	}
@@ -28,5 +36,6 @@ public class UserBO {
 	public void updateUser(User userUpdate) throws SQLException {
 		userDAO.updateUser(userUpdate);
 	}
+	
 
 }

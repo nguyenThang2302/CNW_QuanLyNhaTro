@@ -21,7 +21,10 @@ public class BoardingHouseBO {
 		return boardingHouseDAO.getBoardingHouseById(userId,boardingHouseId);
 	}
 	public boolean update(BoardingHouse boardingHouse, UUID userId) {
-		return boardingHouseDAO.create(boardingHouse,userId);
+		return boardingHouseDAO.update(boardingHouse,userId);
 		
+	}
+	public List<BoardingHouse> getListBoardingHouseOfTenant(UUID userId){
+		return boardingHouseDAO.getListBoardingHoseOfTenant(userId);
 	}
 }

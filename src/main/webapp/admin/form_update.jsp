@@ -1,7 +1,5 @@
-<%@page import="model.bean.User"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%><!DOCTYPE html>
+ pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <%@page import="model.bean.User"%>
 <html lang="en">
 
@@ -324,9 +322,9 @@
 							<div class="card-body">
 								<div class="basic-form">
 									<%
-									User user = (User) request.getAttribute("user");
+									User userInfo = (User) request.getAttribute("userInfo");
 									%>
-									<form class="user" action="update?email=<%=user.getEmail()%>"
+									<form class="user" action="update?email=<%=userInfo.getEmail()%>"
 										method="POST">
 
 										<div class="form-group row">
@@ -334,11 +332,11 @@
 											<div class="col-sm-6 mb-3 mb-sm-0">
 												<input type="text" class="form-control form-control-user"
 													id="email" placeholder="Email" name="email"
-													value="<%=user.getEmail()%>" readonly>
+													value="<%=userInfo.getEmail()%>" readonly>
 											</div>
 											<div class="col-sm-6 mb-3 mb-sm-0">
 												<input type="text" class="form-control form-control-user"
-													value="<%=user.getFullName()%>" id="fullName"
+													value="<%=userInfo.getFullName()%>" id="fullName"
 													placeholder="Full Name" name="fullName">
 											</div>
 
@@ -347,11 +345,11 @@
 											<div class="col-sm-6 mb-3 mb-sm-0">
 												<input type="password"
 													class="form-control form-control-user" id="password"
-													placeholder="Password" name="password" value="<%=user.getPassword() %>">
+													placeholder="Password" name="password" value="<%=userInfo.getPassword() %>">
 											</div>
 											<div class="col-sm-6 mb-3 mb-sm-0">
 												<input type="text" class="form-control form-control-user"
-													value="<%=user.getAddress()%>" id="address"
+													value="<%=userInfo.getAddress()%>" id="address"
 													placeholder="Address" name="address">
 											</div>
 										</div>
@@ -384,34 +382,7 @@
 				</div>
 			</div>
 		</div>
-		<!--**********************************
-            Content body end
-        ***********************************-->
-
-
-		<!--**********************************
-            Footer start
-        ***********************************-->
-		<div class="footer">
-			<div class="copyright">
-				<p>
-					Copyright © Designed &amp; Developed by <a href="#" target="_blank">Quixkit</a>
-					2019
-				</p>
-			</div>
-		</div>
-		<!--**********************************
-            Footer end
-        ***********************************-->
-
-		<!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-		<!--**********************************
-           Support ticket button end
-        ***********************************-->
-
+	
 
 	</div>
 	<!--**********************************

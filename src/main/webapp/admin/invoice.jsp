@@ -12,9 +12,9 @@
 <title>Focus - Bootstrap Admin Dashboard</title>
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16"
-	href="../template/admin/images/favicon.png">
+	href="./images/favicon.png">
 <!-- Custom Stylesheet -->
-<link href="../template/admin/css/style.css" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
 
 </head>
 
@@ -400,9 +400,9 @@
         Scripts
     ***********************************-->
 	<!-- Required vendors -->
-	<script src="../template/admin/vendor/global/global.min.js"></script>
-	<script src="../template/admin/js/quixnav-init.js"></script>
-	<script src="../template/admin/js/custom.min.js"></script>
+	<script src="./vendor/global/global.min.js"></script>
+	<script src="./js/quixnav-init.js"></script>
+	<script src="./js/custom.min.js"></script>
 </body>
 
 </html>

@@ -200,4 +200,45 @@ public class InvoiceDAO {
 		con.close();
 	}
 
+	public List<Invoice> getInvoiceByEmail(String email) throws SQLException {
+		Connection con = connection.connect();
+		List<Invoice>result = new ArrayList<Invoice>();
+		String sql = "SELECT i.* FROM users INNER JOIN boarding_house \n" + "ON users.id = boarding_house.user_id\n"
+				+ "JOIN rooms ON boarding_house.id = rooms.boarding_house_id\n"
+				+ "INNER JOIN invoice AS i ON i.room_id = rooms.id \n" + "WHERE users.email=?";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, email);
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			Invoice invoice = new Invoice();
+			invoice.setId(UUID.fromString(rs.getString("id")));
+			invoice.setDate(rs.getDate("date"));
+
+			// Assuming there is a method to retrieve RoomInfo by id
+			RoomBO roomBO = new RoomBO();
+
+			Room roomInfo = roomBO.getRoomByRoomID(rs.getObject("room_id").toString());
+			invoice.setRoom(roomInfo);
+			invoice.setPreviousElectricMeter(rs.getDouble("previous_electric_meter"));
+			invoice.setCurrentElectricMeter(rs.getDouble("current_electric_meter"));
+			invoice.setElectricityCost(rs.getDouble("electricity_cost"));
+			invoice.setPreviousWaterMeter(rs.getDouble("previous_water_meter"));
+			invoice.setCurrentWaterMeter(rs.getDouble("current_water_meter"));
+			invoice.setWaterCost(rs.getDouble("water_cost"));
+			invoice.setAdditionalCost(rs.getDouble("additional_cost"));
+			invoice.setTotalCost(rs.getDouble("total_cost"));
+			invoice.setRoomCost(rs.getDouble("room_cost"));
+			invoice.setStatus(InvoiceStatus.valueOf(rs.getString("status")));
+			result.add(invoice);
+		}
+
+		// Close resources
+		rs.close();
+		pstmt.close();
+		con.close();
+
+		return result;
+	}
+
 }

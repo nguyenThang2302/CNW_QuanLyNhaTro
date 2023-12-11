@@ -19,7 +19,8 @@ public class InvoiceBO {
 			e.printStackTrace();
 		}
 	}
-	public List<Invoice>getAllInvoiceByRoomID(String room_id){
+
+	public List<Invoice> getAllInvoiceByRoomID(String room_id) {
 		try {
 			return invoiceDAO.getAllInvoiceByRoomID(room_id);
 		} catch (SQLException e) {
@@ -28,16 +29,18 @@ public class InvoiceBO {
 		}
 		return null;
 	}
-	public Invoice getByYearAndMonthAndRoomID(int month, int year, String roomID){
+
+	public Invoice getByYearAndMonthAndRoomID(int month, int year, String roomID) {
 		try {
-			return invoiceDAO.getAllInvoiceByYearAndMonthAndRoomID(month,year,roomID);
+			return invoiceDAO.getAllInvoiceByYearAndMonthAndRoomID(month, year, roomID);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
-	public Invoice getInvoiceByID(String invoice_id){
+
+	public Invoice getInvoiceByID(String invoice_id) {
 		try {
 			return invoiceDAO.getInvoiceByID(invoice_id);
 		} catch (SQLException e) {
@@ -46,6 +49,7 @@ public class InvoiceBO {
 		}
 		return null;
 	}
+
 	public void updateInvoice(Invoice invoice) {
 		try {
 			invoiceDAO.updateInvoice(invoice);
@@ -53,6 +57,16 @@ public class InvoiceBO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public List<Invoice> getInvoiceByEmail(String email) {
+		try {
+			return invoiceDAO.getInvoiceByEmail(email);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

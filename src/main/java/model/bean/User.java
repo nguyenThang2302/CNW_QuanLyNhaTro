@@ -11,7 +11,7 @@ public class User {
     private String password;
     private String address;
     private Role role;
-    private boolean enabled;
+    private boolean isEnabled;
 	public UUID getId() {
 		return id;
 	}
@@ -49,14 +49,9 @@ public class User {
         this.role = role;
 	}
 	public boolean isEnabled() {
-		return enabled;
+		return isEnabled;
 	}
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
 	}
-    
-    
-
-    // Getters and setters
-    
 }

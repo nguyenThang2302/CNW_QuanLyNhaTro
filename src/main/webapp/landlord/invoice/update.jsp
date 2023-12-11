@@ -48,7 +48,7 @@
 				Invoice invoice = (Invoice) request.getAttribute("invoice");
 				%>
 				<div class="card-body">
-					<form action="../landlord/boarding-house" method="POST">
+					<form action="../landlord/room" method="POST">
 						<input id="room_id" class="input--style-5" type="text"
 							style="display: none;" name="room_id">
 						<div class="form-row">
@@ -56,7 +56,7 @@
 							<div class="value">
 								<div class="input-group">
 									<input class="input--style-5" type="number"
-										name="additionalCost" value=<%=invoice.getAdditionalCost() %>>
+										name="additionalCost" value=<%=invoice.getAdditionalCost()%>>
 								</div>
 							</div>
 						</div>
@@ -64,7 +64,7 @@
 							<div class="name">Room Cost</div>
 							<div class="value">
 								<div class="input-group">
-									<input class="input--style-5" type="number" name="roomCost" value=<%=invoice.getRoomCost() %>>
+									<input class="input--style-5" type="number" name="roomCost" value=<%=invoice.getRoomCost()%>>
 								</div>
 							</div>
 						</div>

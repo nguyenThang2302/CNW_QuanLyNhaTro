@@ -44,7 +44,9 @@
 					<h2 class="title">Tạo hoá đơn</h2>
 				</div>
 				<div class="card-body">
-					<form action="../landlord/boarding-house" method="POST">
+					<form
+						action="../landlord/room?add_new_invoice=<%=(String) request.getAttribute("room_id")%>"
+						method="POST">
 						<input id="room_id" class="input--style-5" type="text"
 							style="display: none;" name="room_id">
 						<div class="form-row">
@@ -64,7 +66,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="form-row">
 							<div class="name">Status</div>
 							<div class="value">
@@ -95,7 +97,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div>
 							<button class="btn btn--radius-2 btn--red" type="submit"
 								name="createInvoice">Tạo hoá đơn</button>

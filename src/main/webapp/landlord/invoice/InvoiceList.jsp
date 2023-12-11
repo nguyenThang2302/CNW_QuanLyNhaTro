@@ -434,11 +434,10 @@
 											<td><%=invoice.getPreviousWaterMeter()%></td>
 											<td><%=invoice.getRoomCost()%></td>
 											<td><%=invoice.getTotalCost()%></td>
-											<%String room_id =(String) request.getParameter("view_invoice"); %>
 											<td><a
-												href="../landlord/boarding-house?update_invoice=<%=invoice.getId()%>"
+												href="../landlord/room?update_invoice=<%=invoice.getId()%>"
 												class="view" title="Update" data-toggle="tooltip">Update
-													</a></td>
+											</a></td>
 										</tr>
 										<%
 										}
